@@ -1,0 +1,28 @@
+{
+  "name": "geekedu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/main.js",
+  "scripts": {
+    "scss": "node_modules/.bin/node-sass scss/index.scss --output build/css --source-map true --source-map-contents --output-style compact",
+    "copy-index": "cp -R index.html ./build",
+    "copy-css": "cp scss/normalize.css ./build/css/",
+    "copy-js": "cp -R js/ ./build/js",
+    "copy-asset": "cp -R asset/ ./build/asset",
+    "copy-vendor": "echo 'nothing to load'",
+    "copy-all": "npm run copy-index && npm run copy-css && npm run copy-js && npm run copy-asset && npm run copy-vendor",
+    "clean": "rm -rf build",
+    "init": "mkdir -p build/css",
+    "rebuild": "npm run clean && npm run init && npm run copy-all && npm run scss",
+    "watch": "node_modules/.bin/onchange 'js/*.js' 'scss/*.scss' 'index.html' -p -i -- npm run rebuild",
+    "reload": "reload -b -v -d build -w build -n 127.0.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "onchange": "^4.1.0",
+    "reload": "^2.4.0"
+  }
+}
